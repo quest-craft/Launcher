@@ -7,23 +7,6 @@ You'll probably need a few hours to get everything working. Fortunately, we have
 
 For your evaluation, there are sample files provided that you will be able to upload to your site to see if it even works for you.
 
-## Pretty Pictures
-
-If you are going to create modpacks with our GUI tool, you'll be seeing this beaut:
-
-![Modpack Creator](readme/pack_manager.png)
-
-![Modpack Creator](readme/modpack_creator.png)
-
-![Build Modpacks](readme/packages_generator.png)
-
-Making a modpack is just drag and drop into a folder like this:
-
-* src/**config**/
-* src/**mods**/
-* src/**resourcepacks**/
-* loaders/
-
 LiteLoader and Forge installers, or Fabric Loader, go into the *loaders* folder. :ok_hand:
 
 ### More Pictures
