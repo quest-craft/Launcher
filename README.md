@@ -1,16 +1,6 @@
 QuestCraft Launcher
 ================
 
-
-Need to make it easy for people to install and play your modpack? The SKCraft Launcher platform may be for you if:
-
-:heavy_check_mark: You want your own logo and branding on the launcher, with your own news feed  
-:heavy_check_mark: You want to be able to update the modpack whenever you want  
-:heavy_check_mark: You don't want to depend on anyone else  
-:heavy_check_mark: There's several modpacks you want to provide as a set  
-:heavy_check_mark: You want to provide 'hidden' modpacks that are only accessible by a secret code
-
-
 ## Getting Started
 
 You'll probably need a few hours to get everything working. Fortunately, we have a [detailed wiki](https://github.com/SKCraft/Launcher/wiki) with screenshots for every step, intended for someone with minimal technical experience.
