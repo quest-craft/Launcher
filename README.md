@@ -1,5 +1,6 @@
 QuestCraft Launcher
 ================
+Original from https://github.com/SKCraft
 
 ## Getting Started
 
