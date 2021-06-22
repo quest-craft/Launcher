@@ -1,3 +1,3 @@
-#QuestCraft Launcher
+QuestCraft Launcher
 ================
 More Info Coming Soon
