@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QuestCraft Launcher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript" src="../node_modules/androidjs/lib/androidjs.js"></script>
+
+    <style type="text/css">
+      html, body {
+        background: black;
+      }
+
+      .versions{
+        background: rgb(170, 170, 170);
+        border: gray 3px solid;
+        margin: 10px;
+        margin-right: 5px;
+        width: 75px;
+      }
+
+      .playButton{
+        background: rgb(0, 192, 0);
+        border: green 3px solid;
+        margin: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+        width: 75px;
+      }
+
+      .userButton{
+        background: rgb(170, 170, 170);
+        border: gray 3px solid;
+        margin: 10px;
+        margin-left: 5px;
+        width: 75px;
+      }
+
+      .copy{
+        color: white;
+        margin: 0;
+        text-align: center;
+
+        position: fixed;
+        left: 50%;
+        bottom: 3px;
+        transform: translate(-50%, 0);
+      }
+
+      .text{
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        border: gray 10px double;
+      }
+
+      .settings{
+        position: fixed;
+        top: 0;
+        right: 0;
+
+        border: gray 10px double;
+      }
+
+      .main{
+        background: url('../assets/images/bg.png');
+        background-position: 50%;
+        background-size: 105%;
+
+        position: fixed;
+        top: calc(50% + 35px);
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: calc(100% - 20px);
+        height: calc(100% - 140px);
+
+        border: gray 10px solid;
+        transition: 0.5s;
+      }
+
+      #username{
+        text-align: center;
+        color: white;
+      }
+
+      .loginBox{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+    <script src="../assets/skinveiwer.js"></script>
+    <script>
+
+      document.onmousemove = function(data){
+        let x = (data.clientX / window.innerWidth) * 100
+        let y = (data.clientY / window.innerHeight) * 100
+
+        if(document.getElementById('main')){
+          document.getElementById('main').style.backgroundPositionX = x+'%'
+          document.getElementById('main').style.backgroundPositionY = y+'%'
+        }
+      }
+
+      document.ontouchstart = function(data){
+        let x = (data.clientX / window.innerWidth) * 100
+        let y = (data.clientY / window.innerHeight) * 100
+
+        if(document.getElementById('main')){
+          document.getElementById('main').style.backgroundPositionX = x+'%'
+          document.getElementById('main').style.backgroundPositionY = y+'%'
+        }
+      }
+
+      function loadLauncher(info){
+        document.body.innerHTML = `<img class="text" onclick="front.send('page', 'home')" src="../assets/images/text.png">
+    <img class="settings" onclick="front.send('page', 'settings')" src="../assets/images/settings.png">
+    <div class="main" id="main">
+      <select class="versions" oninput="front.send('ver', this.value)">
+        <option value="1.17">1.17</option>
+        <option value="1.16">1.16</option>
+        <option value="1.15">1.15</option>
+        <option value="1.14">1.14</option>
+        <option value="1.13">1.13</option>
+        <option value="1.12">1.12</option>
+        <option value="1.7">1.7</option>
+      </select>
+
+      <button class="playButton">Play</button>
+      <button class="userButton" onclick="front.send('getInfo', '`+info.selectedProfile.name+`')">`+info.selectedProfile.name+`</button><br>
+
+      <center>
+        <canvas id="skin_container"></canvas>
+        <h1 id="username"></h1>
+      </center>
+    </div>
+
+    <p class="copy">&copy; The QuestCraft Team</p>`
+      }
+
+      front.on('load', function(data){
+        loadLauncher()
+      })
+
+      function tryLogin(){
+        front.send('login', JSON.stringify({
+          username: document.getElementById('username').value,
+          password: document.getElementById('password').value
+        }))
+      }
+
+      function login(uname, pass){
+        front.send('login', JSON.stringify({
+          username: uname,
+          password: pass
+        }))
+      }
+
+      front.on('getInfo', function(info){
+        info = JSON.parse(info)
+
+        document.getElementById('username').innerHTML = info.data.name
+
+        let skinViewer = new skinview3d.SkinViewer({
+          canvas: document.getElementById("skin_container"),
+          width: 300,
+          height: 400,
+          skin: 'http://127.0.0.1:7080/skin.jpeg'
+        });
+
+        let control = skinview3d.createOrbitControls(skinViewer);
+        control.enableRotate = true;
+        control.enableZoom = true;
+        control.enablePan = false;
+      })
+
+      front.on('login', function(data){
+        let info = JSON.parse(data)
+        loadLauncher(info)
+
+        console.log(info)
+      })
+
+
+    </script>
+  </head>
+
+  <style>
+    .app{
+      font-size:30px;
+    }
+  </style>
+
+  <body>
+    <div class="loginBox">
+      <input type="text" id="username"><br><br>
+      <input type="password" id="password"><br><br>
+      <button onclick="tryLogin()">Login</button><br>
+    </div>
+  </body>
+</html>

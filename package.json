@@ -1,0 +1,32 @@
+{
+    "version": "1.0.0",
+    "name": "questcraft",
+    "app-name": "QuestCraft",
+    "package-name": "webview",
+    "project-type": "webview",
+    "icon": "./assets/icon/icon.png",
+    "dist-path": "./dist",
+    "permission": [
+        "android.permission.INTERNET",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_EXTERNAL_STORAGE"
+    ],
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "start:dev": "node .",
+        "build": "androidjs build"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "androidjs": "^2.0.2",
+        "express": "^4.17.1",
+        "node-fetch": "^2.6.1",
+        "yggdrasil": "^1.6.0"
+    },
+    "project-name": "QuestCraft",
+    "theme": {
+        "fullScreen": true
+    }
+}
